@@ -1,0 +1,57 @@
+/*header*/
+.header{
+	height:10%;
+	background-color:blue;
+}
+
+.logo{
+	width:40%;
+	background-color:blue;
+	content:"FUNDA LOGO";
+}
+
+.menu-container{
+
+}
+/*menu bar*/
+.menu-bar{
+	
+}
+/*menu items*/
+.menu-item{
+	
+	
+}
+
+/*body*/
+body{
+	background-color: white;
+}
+
+/*login*/
+.login{
+	width: 400px;
+	margin-top: 5%;
+	margin-left: 35%;
+}
+.login-input{
+	position: relative;
+	width: 400px;
+	height: 50px;
+	border-color: #004affc2;
+	border-radius: 10px;
+}
+
+#login-button{
+	position: absolute;
+	left: 45%;
+	background-color: blue;
+	width: 130px;
+	height: 50px;
+	color: white;
+	border-radius: 10px;
+	border-width: 2;
+	font-size: 18px;
+	border-color: #004affc2;
+	/*margin-left: 15%;*/
+}
