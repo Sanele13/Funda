@@ -16,7 +16,7 @@
 			
 		</div>
 		<br/>
-		<p style = "text-align: center;"><a href = "create/"><span style = "text-decoration: underline;text-align: center;">Create Account</span></a></p>
+		<p style = "text-align: center;"><a href = "create/"><span style = "text-decoration: underline;">Create Account</span></a></p>
 		
 	</body>
 </html>
