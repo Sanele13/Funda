@@ -14,6 +14,7 @@
 				<input id = "login-button" name = "submit" type = "submit" value="Log in">
 			</form>
 		</div>
+		<p><a href = ""><span style = "text-decoration: underline;">Create Account</span></a></p>
 		
 	</body>
 </html>
