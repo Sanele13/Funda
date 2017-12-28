@@ -1,6 +1,5 @@
-/*header*/
 .header{
-	height:10%;
+	height:60px;
 	background-color:blue;
 }
 
@@ -24,9 +23,6 @@
 }
 
 /*body*/
-body{
-	background-color: white;
-}
 
 /*login*/
 .login{
