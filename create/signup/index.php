@@ -11,6 +11,8 @@ $lastName = $_POST["surname"];
 $IdentityNum = $_POST["ID"];
 $password = $_POST["password"];
 $confPassword = $_POST["conf-password"];
+$cell_number = $_POST["cell_number"];
+$email_address = $_POST["email_address"];
 
 //sanitise input to database
 
