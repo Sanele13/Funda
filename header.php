@@ -1,1 +1,3 @@
-<div class = "header"></div>
+<div class = "header">
+	<?php include("menu.php"); ?>
+</div>

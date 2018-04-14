@@ -1,6 +1,6 @@
 .header{
 	height:60px;
-	background-color:blue;
+	background-color:#1f639e;
 }
 
 .logo{
@@ -14,7 +14,7 @@
 }
 /*menu bar*/
 .menu-bar{
-	
+	text-align: center;
 }
 /*menu items*/
 .menu-item{
@@ -22,8 +22,45 @@
 	
 }
 
-/*body*/
+.nav-menu-item{
+    display: inline-block;
+    color: white;
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px 20px 10px 20px;
+    background-color: #1f639e;
+    border-radius: 5px;
+    width: 100px;
+    text-decoration: none;
+    text-align: center;
+    font-family: monospace;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+  	font-stretch: expanded;
+}
 
+/*body*/
+.grid-display{
+    display: inline-block;
+    color: white;
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px 20px 10px 20px;
+    background-color: #1f639e;
+    border-radius: 5px;
+    width: 200px;
+    height: 100px;
+    text-decoration: none;
+    text-align: center;
+    font-family: monospace;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+  	font-stretch: expanded;
+}
 /*login*/
 .login{
 	width: 400px;
@@ -39,8 +76,8 @@
 }
 
 #login-button{
-	position: absolute;
-	left: 45%;
+/*	position: absolute;
+	left: 47%;*/
 	background-color: blue;
 	width: 130px;
 	height: 50px;
@@ -49,5 +86,5 @@
 	border-width: 2;
 	font-size: 18px;
 	border-color: #004affc2;
-	/*margin-left: 15%;*/
+	margin-left: 30%;
 }
