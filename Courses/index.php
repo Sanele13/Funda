@@ -10,7 +10,7 @@
 		<br><br>
 		<div>
 			<div>
-				<a href="#" class="grid-display">Mathematics</a>
+				<a href="Mathematics/" class="grid-display">Mathematics</a>
 				<a href="#" class="grid-display">Physical Sciences</a>
 				<a href="#" class="grid-display">Accounting</a></div>
 			<div>
