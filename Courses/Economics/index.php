@@ -7,7 +7,7 @@
 	<body>
 		<?php include("../../header.php"); ?>
 		
-		<h1 style="text-align: center;">Mathematics</h1>
+		<h1 style="text-align: center;">Economics</h1>
 		
 		<div class="subject-container">
 			<div class="units">
