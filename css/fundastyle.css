@@ -27,7 +27,7 @@
     color: white;
     border-color: white;
     border-width: 2px;
-    border-style: solid;
+    /*border-style: solid;*/
     padding: 10px 20px 10px 20px;
     background-color: #1f639e;
     border-radius: 5px;
@@ -41,6 +41,9 @@
   	font-stretch: expanded;
 }
 
+.nav-menu-item:hover{
+	border-style: solid;
+}
 /*body*/
 .grid-display{
     display: inline-block;
