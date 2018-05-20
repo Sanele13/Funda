@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Create Account</title>
-		<link type="text/css" rel = "stylesheet" href="http://localhost/funda/css/fundastyle.css"></link>
+		<link type="text/css" rel = "stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/funda/css/fundastyle.css"></link>
 	</head>
 <body>
 	<?php include("../header.php"); ?>

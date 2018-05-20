@@ -12,11 +12,11 @@
 <div id = "las">
 	<span>Learning Areas</span>
 	<div v-for = "la in las" class = "la">
-		{{la.title}}
-		<div v-for="chapter in la.chapters" class = "chapter">
-			{{chapter.title}}
-			<div  v-for= "unit in chapter.units" class = "units">
-			    {{unit}}
+		<span v-on:click = "show_hide_chapter">{{la.title}}</span>
+		<div v-for="chapter in la.chapters" class = "chapter hide">
+			<span v-on:click = "show_hide_units">{{chapter.title}}</span>
+			<div  v-for= "unit in chapter.units" class = "units hide">
+			    <span >{{unit}}</span>
 			</div>
 		</div>
 	</div>
@@ -26,8 +26,8 @@
 	Title: <input type="text" id="name"><br>
 	Chapter: <input type="text" id="chapter_title"><br>
 	Units:
-	<div id = "units_area" contenteditable="true">
-		Enter units here
+	<div id = "units_area" placeholder = "Enter units here..." contenteditable="true">
+		
 	</div>
 	<button onclick="build_temp(document.getElementById('name').value,document.getElementById('chapter_title').value,document.getElementById('units_area').innerHTML);">Next Chapter</button>
 	<button onclick="submit()">Done</button>
@@ -110,7 +110,7 @@
 			var units_arr = units.split(',');
 			learning_areas['las'][learning_areas['las'].length-1]['chapters'].push({'title':chapter,'units':units_arr});
 			//console.log(learning_areas[learning_areas.length-1]);
-			//console.log(learning_areas);
+			console.log(learning_areas);
 		}
 		else{
 			temp['title'] = title;
@@ -119,6 +119,7 @@
 			temp['chapters'].push({'title':chapter,'units':units_arr});
 			//console.log(Object.keys(temp).length);
 			learning_areas['las'].push(temp);
+			console.log(learning_areas)
 			//temp = {};
 		}
 		
@@ -137,6 +138,8 @@
 		
 					xhttp.open("GET", "add_la.php?json="+json, true);
 					xhttp.send();
+
+					get_las();
 		
 		/*		}
 				else{
@@ -149,8 +152,44 @@
 			las: learning_areas['las']
 			},
 			methods:{
-				add_la: function(la){
-					this.las.push(a);
+				show_hide_chapter: function(event){
+					if(event.path[1].getElementsByClassName('chapter')[0].classList.contains('hide')){
+						for(var i=0; i<event.path[1].getElementsByClassName('chapter').length;i++){
+							event.path[1].getElementsByClassName('chapter')[i].classList.remove('hide')
+							event.path[1].getElementsByClassName('chapter')[i].classList.add('display')
+						}	
+					}
+					else if(event.path[1].getElementsByClassName('chapter')[0].classList.contains('display')){
+						for(var i=0; i<event.path[1].getElementsByClassName('chapter').length;i++){
+							event.path[1].getElementsByClassName('chapter')[i].classList.remove('display')
+							event.path[1].getElementsByClassName('chapter')[i].classList.add('hide')
+						}	
+					}
+					else{
+						console.log('andazi ke')
+					}
+					//console.log(event.path[1].getElementsByClassName('chapter')[0].classList.contains('hide'))
+				},
+				show_hide_units: function(event){
+					console.log(event.path[1].getElementsByClassName('units')[0].classList)
+					if(event.path[1].getElementsByClassName('units')[0].classList.contains('hide')){
+						for(var i=0; i<event.path[1].getElementsByClassName('units').length;i++){
+							console.log('hey')
+							event.path[1].getElementsByClassName('units')[i].classList.remove('hide')
+							event.path[1].getElementsByClassName('units')[i].classList.add('display')		
+						}
+					}
+					else if(event.path[1].getElementsByClassName('units')[0].classList.contains('display')){
+						//console.log(event.path[1].getElementsByClassName('chapter')[0].style.display)
+						for(var i=0; i<event.path[1].getElementsByClassName('units').length;i++){
+							event.path[1].getElementsByClassName('units')[i].classList.remove('display')
+							event.path[1].getElementsByClassName('units')[i].classList.add('hide')	
+						}
+					}
+					else{
+						console.log('andazi ke')
+					}
+					//console.log(event.path[1].getElementsByClassName('chapter')[0].classList.contains('hide'))
 				}
 			}
 	});

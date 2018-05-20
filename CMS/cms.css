@@ -1,6 +1,19 @@
 .chapter{
 	padding-left: 5%; 
+	
 }
 .units{
 	padding-left: 10%;
+	/*display: none;*/
+}
+
+.display{
+	display: block;
+}
+.hide{
+	display: none;
+}
+
+.chapter,.units,.la{
+	cursor: pointer;
 }
