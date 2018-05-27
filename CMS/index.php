@@ -16,7 +16,7 @@
 		<div v-for="chapter in la.chapters" class = "chapter hide">
 			<span v-on:click = "show_hide_units">{{chapter.title}}</span>
 			<div  v-for= "unit in chapter.units" class = "units hide">
-			    <span >{{unit}}</span>
+			    <span v-on:click = "edit_content">{{unit}}</span>
 			</div>
 		</div>
 	</div>
