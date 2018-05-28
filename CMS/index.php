@@ -9,17 +9,46 @@
 </head>
 <body>
 <div id = "result"></div>
-<div id = "las">
-	<span>Learning Areas</span>
-	<div v-for = "la in las" class = "la">
-		<span v-on:click = "show_hide_chapter">{{la.title}}</span>
-		<div v-for="chapter in la.chapters" class = "chapter hide">
-			<span v-on:click = "show_hide_units">{{chapter.title}}</span>
-			<div  v-for= "unit in chapter.units" class = "units hide">
-			    <span v-on:click = "edit_content">{{unit}}</span>
+<div id = "container">
+	<div id = "las">
+		<span>Learning Areas</span>
+		<div v-for = "la in las" class = "la">
+			<span v-on:click = "show_hide_chapter">
+				{{la.title}}
+			</span>
+			<div v-for="chapter in la.chapters" class = "chapter hide">
+				<span v-on:click = "show_hide_units">
+					{{chapter.title}}
+				</span>
+				<div  v-for= "unit in chapter.units" class = "units hide">
+			    	<span v-on:click = "edit_content">
+			    		{{unit}}
+			    	</span>
+				</div>
 			</div>
 		</div>
 	</div>
+
+	<div id="edit_view" class="hide">
+		<span class="edit_view_title">{{title}}/{{chapter}}/{{unit}}</span>
+		<div class="tool-bar">
+			<ul class="tools">
+				<li v-on:click = "add_paragraph" class="tool">Add Paragraph</li>
+				<li class="tool">Add Image</li>
+				<li class="tool">Add Equation</li>
+				<li class="tool">Add Paragraph</li>
+			</ul>
+		</div>
+		<div v-for="content in content" class="content">
+			{{content}}
+		</div>
+		<div id="id" contenteditable="true"></div>
+		<div class="edit hide" placeholder = "Enter paragraph here..." contenteditable="true">
+			
+		</div>
+		<button v-on:click="add_para">Add</button>
+
+	</div>	
 </div>
 <br>
 <div id = "form" style="display: none">
@@ -173,7 +202,7 @@
 				show_hide_units: function(event){
 					console.log(event.path[1].getElementsByClassName('units')[0].classList)
 					if(event.path[1].getElementsByClassName('units')[0].classList.contains('hide')){
-						for(var i=0; i<event.path[1].getElementsByClassName('units').length;i++){
+						for(var i=0; i<event.path[1    ].getElementsByClassName('units').length;i++){
 							console.log('hey')
 							event.path[1].getElementsByClassName('units')[i].classList.remove('hide')
 							event.path[1].getElementsByClassName('units')[i].classList.add('display')		
@@ -190,8 +219,41 @@
 						console.log('andazi ke')
 					}
 					//console.log(event.path[1].getElementsByClassName('chapter')[0].classList.contains('hide'))
+				},
+				edit_content: function(event){
+					console.log(event.path)
+					edit_view_app.title=event.path[3].firstChild.innerText
+					edit_view_app.chapter=event.path[2].firstElementChild.innerText
+					edit_view_app.unit=event.path[0].innerText
+					document.getElementById('edit_view').classList.remove('hide');
+					document.getElementById('edit_view').classList.add('display');
 				}
 			}
+	});
+
+	var edit_view_app = new Vue({
+		el:'#edit_view',
+		data:{
+			title:'Learning Area Title',
+			chapter:'chapter',
+			unit:'unit',
+			content:{}
+		},
+		methods:{
+			add_paragraph:function() {
+				// body...
+				document.getElementsByClassName('edit')[0].classList.remove('hide')
+				document.getElementsByClassName('edit')[0].classList.add('display')
+			},
+			add_para:function(){
+				var id = document.getElementById('id').innerHTML;
+				var paragraph = document.getElementsByClassName('edit')[0].innerHTML
+				this.content[id] = paragraph;
+				console.log(this.content)
+			}
+		}
+
+		
 	});
 </script>
 </body>
