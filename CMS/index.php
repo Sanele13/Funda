@@ -39,8 +39,7 @@
 				<li class="tool">Add Paragraph</li>
 			</ul>
 		</div>
-		<div v-for="content in content" class="content">
-			{{content}}
+		<div class="content">		
 		</div>
 		<div id="id" contenteditable="true"></div>
 		<div class="edit hide" placeholder = "Enter paragraph here..." contenteditable="true">
@@ -92,45 +91,7 @@
 	function set_las(las) {
 		learning_areas = JSON.parse(las);
 	}
-	//document.write(learning_areas);
-	/*learning_areas = {
-				'las':[
-					{
-						'title':'Maths Gr10',
-						'chapters':[
-							{
-								'title':'Trigonometry',
-								'units': [
-									'Complementary Angles',
-									'Waves',
-									'Other things'
-								]
-							}
-						]
-					},
-					{
-						'title':'Maths Gr11',
-						'chapters':[
-							{
-								'title':'Geometry',
-								'units': [
-									'Complementary Angles',
-									'Waves',
-									'Other things'
-								]
-							},
-							{
-								'title':'Geometry II',
-								'units': [
-									'Supplemantary Angles',
-									'Waves and shit',
-									'Other things'
-								]
-							}
-						]
-					}
-				]
-			}*/
+	
 		var temp = {};
 		//console.log(learning_areas[1])
 	function build_temp(title,chapter,units) {
@@ -237,7 +198,7 @@
 			title:'Learning Area Title',
 			chapter:'chapter',
 			unit:'unit',
-			content:{}
+			content:null
 		},
 		methods:{
 			add_paragraph:function() {
@@ -246,10 +207,11 @@
 				document.getElementsByClassName('edit')[0].classList.add('display')
 			},
 			add_para:function(){
-				var id = document.getElementById('id').innerHTML;
-				var paragraph = document.getElementsByClassName('edit')[0].innerHTML
-				this.content[id] = paragraph;
-				console.log(this.content)
+				var block_id = document.getElementById('id').innerHTML;
+				var paragraph = document.getElementsByClassName('edit')[0].innerHTML.replace(/<div>/g,'')
+				paragraph = paragraph.replace(/<\/div>/g,'')
+				document.getElementsByClassName('content')[0].innerHTML += '<p>'+paragraph+'</p>'
+				console.log(paragraph)
 			}
 		}
 
