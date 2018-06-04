@@ -39,7 +39,10 @@
 				<li class="tool">Add Paragraph</li>
 			</ul>
 		</div>
-		<div class="content">		
+		<div class="content">
+			<p v-for="paragraph in content" :id = "paragraph.id" contenteditable="false" v-on:click="edit_paragraph">
+				{{paragraph.text}}		
+			</p>	
 		</div>
 		<div id="id" contenteditable="true"></div>
 		<div class="edit hide" placeholder = "Enter paragraph here..." contenteditable="true">
@@ -198,7 +201,7 @@
 			title:'Learning Area Title',
 			chapter:'chapter',
 			unit:'unit',
-			content:null
+			content:[]
 		},
 		methods:{
 			add_paragraph:function() {
@@ -207,11 +210,17 @@
 				document.getElementsByClassName('edit')[0].classList.add('display')
 			},
 			add_para:function(){
-				var block_id = document.getElementById('id').innerHTML;
+				var id = document.getElementById('id').innerHTML;
 				var paragraph = document.getElementsByClassName('edit')[0].innerHTML.replace(/<div>/g,'')
 				paragraph = paragraph.replace(/<\/div>/g,'')
-				document.getElementsByClassName('content')[0].innerHTML += '<p>'+paragraph+'</p>'
-				console.log(paragraph)
+				//document.getElementsByClassName('content')[0].innerHTML += '<div id = "'+id+'" contenteditable="false">'+paragraph+'</div>'
+				this.content.push({'id':id,'text':paragraph})
+				console.log(this.content)
+			},
+			edit_paragraph:function(event){
+				console.log(event.path[0]['id'])
+				console.log(document.getElementById(event.path[0]['id']).getAttribute('contenteditable'))
+				document.getElementById(event.path[0]['id']).setAttribute('contenteditable','true');
 			}
 		}
 
