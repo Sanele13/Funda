@@ -220,7 +220,9 @@
 			edit_paragraph:function(event){
 				console.log(event.path[0]['id'])
 				console.log(document.getElementById(event.path[0]['id']).getAttribute('contenteditable'))
-				document.getElementById(event.path[0]['id']).setAttribute('contenteditable','true');
+				var paragraph = document.getElementById(event.path[0]['id']);
+				paragraph.setAttribute('contenteditable','true')
+				paragraph.classList.add('editing')
 			}
 		}
 
