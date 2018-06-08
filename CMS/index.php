@@ -47,11 +47,12 @@
 				<button v-on:click = "stop_editing" class="editing-done">Done</button>
 			</div>
 		</div>
-		<div id="id" contenteditable="true"></div>
+		<div id="id" contenteditable="true"></div><br>
 		<div class="edit hide" placeholder = "Enter paragraph here..." contenteditable="true">
 			
 		</div>
 		<button v-on:click="add_para">Add</button>
+		<button v-on:click="save_content">Save</button>
 
 	</div>	
 </div>
@@ -204,7 +205,8 @@
 			title:'Learning Area Title',
 			chapter:'chapter',
 			unit:'unit',
-			content:[]
+			content:[],
+			content_json:{}
 		},
 		methods:{
 			add_paragraph:function() {
@@ -218,6 +220,7 @@
 				paragraph = paragraph.replace(/<\/div>/g,'')
 				//document.getElementsByClassName('content')[0].innerHTML += '<div id = "'+id+'" contenteditable="false">'+paragraph+'</div>'
 				this.content.push({'id':id,'text':paragraph})
+				this.content_json[id]=paragraph;
 				//console.log(this.content)
 			},
 			edit_paragraph:function(event){
@@ -241,6 +244,20 @@
 				paragraph.setAttribute('contenteditable','false');
 				console.log(event.path);
 
+			},
+			save_content:function(){
+				console.log(this.content_json)
+				console.log(JSON.stringify(this.content_json))
+				var xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+			       // Typical action to be performed when the document is ready:
+							document.getElementById("result").innerHTML = xhttp.responseText;
+							}
+						};
+		
+					xhttp.open("GET", "save_content.php?json="+JSON.stringify(this.content_json)+"&la="+this.title+"&chapter="+this.chapter+"&unit="+this.unit, true);
+					xhttp.send();
 			}
 		}
 
