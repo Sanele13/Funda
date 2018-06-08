@@ -75,5 +75,9 @@
 	border-width: 2px;
 	border-radius: 2px;
 	border-color: green;
+	z-index: 1;
+}
 
+.editing-done{
+	display: none;
 }

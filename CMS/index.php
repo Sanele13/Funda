@@ -40,9 +40,12 @@
 			</ul>
 		</div>
 		<div class="content">
-			<p v-for="paragraph in content" :id = "paragraph.id" contenteditable="false" v-on:click="edit_paragraph">
-				{{paragraph.text}}		
-			</p>	
+			<div v-for="paragraph in content" :id = "paragraph.id" class="para-container">
+				<p contenteditable="false" v-on:click="edit_paragraph">
+					{{paragraph.text}}		
+				</p>
+				<button v-on:click = "stop_editing" class="editing-done">Done</button>
+			</div>
 		</div>
 		<div id="id" contenteditable="true"></div>
 		<div class="edit hide" placeholder = "Enter paragraph here..." contenteditable="true">
@@ -215,14 +218,29 @@
 				paragraph = paragraph.replace(/<\/div>/g,'')
 				//document.getElementsByClassName('content')[0].innerHTML += '<div id = "'+id+'" contenteditable="false">'+paragraph+'</div>'
 				this.content.push({'id':id,'text':paragraph})
-				console.log(this.content)
+				//console.log(this.content)
 			},
 			edit_paragraph:function(event){
-				console.log(event.path[0]['id'])
-				console.log(document.getElementById(event.path[0]['id']).getAttribute('contenteditable'))
-				var paragraph = document.getElementById(event.path[0]['id']);
-				paragraph.setAttribute('contenteditable','true')
+				//console.log(event.path[1])
+				//console.log(document.getElementById(event.path[0]['id']).getAttribute('contenteditable'))
+				var paragraph = event.path[1].getElementsByTagName('p')[0];
+				//console.log(paragraph)
+				paragraph.setAttribute('contenteditable','true');
 				paragraph.classList.add('editing')
+				//event.path[0].childNodes[1].setAttribute('style','display:block');
+				var button = event.path[1].getElementsByTagName('button')[0]
+				button.setAttribute('style','display:block')
+				//console.log();
+
+			},
+			stop_editing:function(event){
+				//remove éditing' from div
+				var paragraph = event.path[1].getElementsByTagName('p')[0];
+				event.path[0].setAttribute('style','display:none');
+				paragraph.classList.remove('editing')
+				paragraph.setAttribute('contenteditable','false');
+				console.log(event.path);
+
 			}
 		}
 
