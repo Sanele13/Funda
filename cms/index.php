@@ -36,7 +36,7 @@
 				<li v-on:click = "add_paragraph" class="tool">Add Paragraph</li>
 				<li class="tool">Add Image</li>
 				<li class="tool">Add Equation</li>
-				<li class="tool">Add Paragraph</li>
+				<li class="tool">Add Video</li>
 			</ul>
 		</div>
 		<div class="content">
