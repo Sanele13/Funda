@@ -47,7 +47,7 @@
 				<button v-on:click = "stop_editing" class="editing-done">Done</button>
 			</div>
 		</div>
-		<div id="id" contenteditable="true"></div><br>
+		<div id="id" contenteditable="true" class="hide"></div><br>
 		<div class="edit hide" placeholder = "Enter paragraph here..." contenteditable="true">
 			
 		</div>
@@ -193,6 +193,31 @@
 					edit_view_app.title=event.path[3].firstChild.innerText
 					edit_view_app.chapter=event.path[2].firstElementChild.innerText
 					edit_view_app.unit=event.path[0].innerText
+					content = [];
+				//	function() {
+			//if(){		
+						var response=""; 
+						var xhttp = new XMLHttpRequest();
+						xhttp.onreadystatechange = function() {
+							if (this.readyState == 4 && this.status == 200) {
+				       // Typical action to be performed when the document is ready:
+								content = JSON.parse(xhttp.response)['content'];
+								console.log(content)
+								}
+							};
+			
+						xhttp.open("GET", event.path[3].firstChild.innerText+"-"+event.path[2].firstElementChild.innerText+"-"+event.path[0].innerText, false);
+						xhttp.send();
+
+						edit_view_app.content = content;
+						console.log(content)
+						//return response;
+			/*		}
+					else{
+						alert("You need to add the task!");
+					}*/
+		//}
+
 					document.getElementById('edit_view').classList.remove('hide');
 					document.getElementById('edit_view').classList.add('display');
 				}
@@ -213,6 +238,8 @@
 				// body...
 				document.getElementsByClassName('edit')[0].classList.remove('hide')
 				document.getElementsByClassName('edit')[0].classList.add('display')
+				document.getElementById('id').classList.remove('hide')
+				document.getElementById('id').classList.add('display')
 			},
 			add_para:function(){
 				var id = document.getElementById('id').innerHTML;
@@ -220,8 +247,12 @@
 				paragraph = paragraph.replace(/<\/div>/g,'')
 				//document.getElementsByClassName('content')[0].innerHTML += '<div id = "'+id+'" contenteditable="false">'+paragraph+'</div>'
 				this.content.push({'id':id,'text':paragraph})
-				this.content_json[id]=paragraph;
+				//this.content_json[id]=paragraph;
 				//console.log(this.content)
+
+				//clear
+				document.getElementById('id').innerHTML = "";
+				document.getElementsByClassName('edit')[0].innerHTML = ""
 			},
 			edit_paragraph:function(event){
 				//console.log(event.path[1])
@@ -246,7 +277,7 @@
 
 			},
 			save_content:function(){
-				console.log(this.content_json)
+				this.content_json = {"content":this.content}
 				console.log(JSON.stringify(this.content_json))
 				var xhttp = new XMLHttpRequest();
 					xhttp.onreadystatechange = function() {
