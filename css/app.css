@@ -1,0 +1,26 @@
+.container{
+	margin: 0 20% 0 20%;
+}
+.courses{
+
+}
+.course{
+	/*text-align: center;*/
+    background-color: #1f639e;
+    color: white;
+    font-family: monospace;
+    font-size: 18px;
+    margin-bottom: 5px;
+    /*border-radius: 20px*/;
+    padding-left: 3%;
+}
+
+.chapter{
+	padding-left: 3%;
+}
+.units{
+	width: 100%;
+}
+.unit{
+	padding-left: 3%;	
+}
