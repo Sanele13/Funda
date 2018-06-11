@@ -1,11 +1,11 @@
 
-<?php //echo $_SERVER['HTTP_HOST']; ?>
+<?php include '../switch.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Funda-CMS</title>
-	<link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['HTTP_HOST']; ?>/cms/cms.css">
-	<script type="text/javascript" src="https://<?php echo $_SERVER['HTTP_HOST']; ?>/js/vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo $host_url; ?>/cms/cms.css">
+	<script type="text/javascript" src="<?php echo $host_url; ?>/js/vue.js"></script>
 </head>
 <body>
 <div id = "result"></div>
