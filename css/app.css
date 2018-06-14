@@ -11,8 +11,10 @@
     font-family: monospace;
     font-size: 18px;
     margin-bottom: 5px;
-    /*border-radius: 20px*/;
+    border-radius: 20px;
     padding-left: 3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 
 .chapter{
@@ -24,3 +26,14 @@
 .unit{
 	padding-left: 3%;	
 }
+.unit:hover{
+	background-color: darkgrey;
+    color: #334554;
+}
+.display{
+	display: block;
+}
+.hide{
+	display: none;
+}
+.
