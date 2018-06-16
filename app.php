@@ -11,13 +11,15 @@
 		<br>
 		<div class="container">
 			<div class="courses">
-				<div v-for="course in courses" class="course" v-on:click="show_units">
-					{{course.title}}
-					<div class="chapters">
+				<div v-for="course in courses" class="course">
+					<div class="la-title" v-on:click="show_chapters">
+						{{course.title}}
+					</div>
+					<div class="chapters hide">
 						<hr style="width: 97%">
-						<div class="chapter" v-for= "chapter in course.chapters">
+						<div class="chapter" v-for= "chapter in course.chapters" v-on:click = "show_units">
 							{{chapter.title}}
-							<div class="units">
+							<div class="units hide">
 								<hr>
 								<div class="unit" v-for="unit in chapter.units">
 									{{unit}}
@@ -35,6 +37,16 @@
 				el: ".container",
 				data: {
 					courses: [{"title":"Maths Gr10","chapters":[{"title":"Trigonometry","units":["Complementary Angles","Waves","Other things"]}]},{"title":"Maths Gr11","chapters":[{"title":"Geometry","units":["Complementary Angles","Waves","Other things"]},{"title":"Geometry II","units":["Supplemantary Angles","Waves and shit","Other things"]}]},{"title":"Title","chapters":[{"title":"asde","units":["\n\t\tzuikewm","esr","ty","u"]}]},{"title":"Fam","chapters":[{"title":"Intro To The Fam","units":["Unit 1","Unit 2","Unit 3"]},{"title":"Intro To The Fam 2","units":["Unit 1","Unit 2","Unit 3","Unit 4","Unit 5"]}]}]
+				},
+				methods:{
+					show_chapters: function(event){
+						console.log(event.path[1].children[1].classList)
+						event.path[1].children[1].classList.toggle('display')
+					},
+					show_units: function(event){
+						console.log(event.path)
+						event.path[0].children[0].classList.toggle('display')
+					}
 				}
 			});
 		</script>

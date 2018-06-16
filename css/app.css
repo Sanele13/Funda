@@ -14,7 +14,9 @@
     border-radius: 20px;
     padding: 5% 3% 5% 5%;
 }
-
+.la-title{
+	padding: 3%;
+}
 .chapter{
 	padding-left: 3%;
 }
@@ -23,4 +25,10 @@
 }
 .unit{
 	padding-left: 3%;	
+}
+.display{
+	display: block !important;
+}
+.hide{
+	display: none;
 }
