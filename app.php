@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<title>Funda-Making a difference through education</title>
-		<link rel = 'stylesheet' type = 'text/css' href = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>/funda/css/fundastyle.css'>
-		<link rel = 'stylesheet' type = 'text/css' href = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>/funda/css/app.css'>
-		<script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/funda/js/vue.js"></script>
+		<link rel = 'stylesheet' type = 'text/css' href = '<?php echo $host_url; ?>/css/fundastyle.css'>
+		<link rel = 'stylesheet' type = 'text/css' href = '<?php echo $host_url; ?>/css/app.css'>
+		<script src="<?php echo $host_url; ?>/js/vue.js"></script>
 	</head>
 	<body>
 		<?php include("header.php"); ?>
@@ -21,8 +21,8 @@
 							{{chapter.title}}
 							<div class="units hide">
 								<hr>
-								<div class="unit" v-for="unit in chapter.units">
-									{{unit}}
+								<div class="unit" v-for="unit in chapter.units" v-on:click="show_content">
+									-{{unit}}
 								</div>
 							</div>
 							<br>							
