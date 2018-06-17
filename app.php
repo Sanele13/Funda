@@ -41,10 +41,19 @@
 				methods:{
 					show_chapters: function(event){
 						console.log(event.path[1].children[1].classList)
-						event.path[1].children[1].classList.toggle('display')
+						for(var i=0; i < document.getElementsByClassName('chapters').length; i++){
+							if(document.getElementsByClassName('la-title')[i].innerHTML === event.path[1].getElementsByClassName('la-title')[0].innerHTML){
+								event.path[1].children[1].classList.toggle('display')
+							}
+							else{
+								document.getElementsByClassName('chapters')[i].classList.add('hide')
+								document.getElementsByClassName('chapters')[i].classList.remove('display')
+							}
+						}
 					},
 					show_units: function(event){
-						console.log(event.path)
+						console.log(event.path[0].children[0])
+						event.path[0].children[0].classList.toggle('hide')
 						event.path[0].children[0].classList.toggle('display')
 					}
 				}
