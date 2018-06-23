@@ -1,0 +1,41 @@
+.outer-container{
+	background-color: white;
+	width: 80%;
+	height: 80%;
+	margin: 10%;
+	border-radius: 2%;
+}
+
+.inner-container{
+	border-radius: 5px;
+	background-color: white;
+	/*height: 80%;
+	width: 80%;
+	margin: 10%;*/
+}
+
+.menu{
+	background-color: #092d4c;
+	width: 50px;
+	height:40px;
+	position: relative;
+	border-radius: 5px;
+}
+.bar-container{
+	width: 40px;
+	height: 20px;
+	background-color: #092d4c;
+	position: absolute;
+	top: 10%;
+	margin: 0px 6px;
+}
+.bar{
+	background-color: white;
+	width: 40px;
+	height:5px;
+	margin-top: 4px;
+
+}
+body{
+	background-color: #1f639e;
+}
