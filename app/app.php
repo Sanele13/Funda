@@ -1,4 +1,4 @@
-<?php include 'switch.php'; ?>
+<?php include '../switch.php'; ?>
 <html>
 	<head>
 		<title>Funda-Making a difference through education</title>
@@ -7,7 +7,7 @@
 		<script src="<?php echo $host_url; ?>/js/vue.js"></script>
 	</head>
 	<body>
-		<?php include("header.php"); ?>
+		<?php //include("../header.php"); ?>
 		<br>
 		<div class="container">
 			<div class="courses">

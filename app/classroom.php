@@ -16,6 +16,8 @@
 		</div>
 		<div class = "outer-container">
 			<div class="inner-container">
+				<?php include 'app.php';?>
+				<script>console.log(app)</script>
 			</div>
 			
 		</div>
