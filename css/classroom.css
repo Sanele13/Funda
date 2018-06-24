@@ -14,12 +14,14 @@
 	margin: 10%;*/
 }
 
-.menu{
+.menu-icon{
 	background-color: #092d4c;
 	width: 50px;
 	height:40px;
 	position: relative;
-	border-radius: 5px;
+	cursor: pointer;
+	z-index: 3;
+	/*border-radius: 5px;*/
 }
 .bar-container{
 	width: 40px;
@@ -34,7 +36,25 @@
 	width: 40px;
 	height:5px;
 	margin-top: 4px;
+}
 
+.menu-options{
+	position: absolute;
+	color: white;
+    background-color: #092d4c;
+    width: fit-content;	
+}
+.menu{
+	height: 0px !important;
+}
+.menu-opt{
+	padding: 5px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-color: white;
+}
+.menu-opt:last-child{
+	border-bottom: none;
 }
 body{
 	background-color: #1f639e;
