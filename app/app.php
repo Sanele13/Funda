@@ -55,6 +55,11 @@
 						console.log(event.path[0].children[0])
 						event.path[0].children[0].classList.toggle('hide')
 						event.path[0].children[0].classList.toggle('display')
+					},
+					show_content:function(){
+						document.getElementsByClassName('container')[0].style.display='none';
+						var title = 
+						document.getElementById("inner-container").innerHTML = title;
 					}
 				}
 			});
