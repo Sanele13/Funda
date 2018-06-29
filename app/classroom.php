@@ -5,6 +5,7 @@
 		<link rel = 'stylesheet' type = 'text/css' href = '<?php echo $host_url; ?>/css/fundastyle.css'>
 		<link rel = 'stylesheet' type = 'text/css' href = '<?php echo $host_url; ?>/css/classroom.css'>
 		<link rel = 'stylesheet' type = 'text/css' href = '<?php echo $host_url; ?>/css/menu.css'>
+		<link rel = 'stylesheet' type = 'text/css' href = '<?php echo $host_url; ?>/css/contentContainer.css'>
 		<script src="<?php echo $host_url; ?>/js/vue.js"></script>
 	</head>
 	<body>
@@ -30,11 +31,16 @@
 		<div id = "outer-container">
 			<div id="inner-container">
 				<?php include 'app.php';?>
+				<div id="content-container">
+					<center><h1>{{title}}</h1></center>
+					<div id = "content" class="hide">
+						<p v-for="paragraph in content" class="paragraph" :id = "paragraph.id">{{paragraph.text}}</p>
+					</div>
+				</div>
 			</div>
 			
 		</div>
 		<script src="<?php echo $host_url; ?>/js/menu.js"></script>
-		<script type="text/javascript">
-		</script>
+		<script src="<?php echo $host_url; ?>/js/contentContainer.js"></script>
 	</body>
 </html>
