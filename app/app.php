@@ -54,10 +54,12 @@
 				//console.log(content)
 				return content
 			}
+			
 			var app = new Vue({
 				el: ".container",
 				data: {
-					courses: [{"title":"Maths Gr10","chapters":[{"title":"Trigonometry","units":["Complementary Angles","Waves","Other things"]}]},{"title":"Maths Gr11","chapters":[{"title":"Geometry","units":["Complementary Angles","Waves","Other things"]},{"title":"Geometry II","units":["Supplemantary Angles","Waves and shit","Other things"]}]},{"title":"Title","chapters":[{"title":"asde","units":["\n\t\tzuikewm","esr","ty","u"]}]},{"title":"Fam","chapters":[{"title":"Intro To The Fam","units":["Unit 1","Unit 2","Unit 3"]},{"title":"Intro To The Fam 2","units":["Unit 1","Unit 2","Unit 3","Unit 4","Unit 5"]}]}]
+					courses: [] 
+					/*[{"title":"Maths Gr10","chapters":[{"title":"Trigonometry","units":["Complementary Angles","Waves","Other things"]}]},{"title":"Maths Gr11","chapters":[{"title":"Geometry","units":["Complementary Angles","Waves","Other things"]},{"title":"Geometry II","units":["Supplemantary Angles","Waves and shit","Other things"]}]},{"title":"Title","chapters":[{"title":"asde","units":["\n\t\tzuikewm","esr","ty","u"]}]},{"title":"Fam","chapters":[{"title":"Intro To The Fam","units":["Unit 1","Unit 2","Unit 3"]},{"title":"Intro To The Fam 2","units":["Unit 1","Unit 2","Unit 3","Unit 4","Unit 5"]}]}]*/
 				},
 				methods:{
 					show_chapters: function(event){
@@ -90,6 +92,27 @@
 					}
 				}
 			});
+		</script>
+		<script type="text/javascript">
+			function get_courses(){
+				courses = [];
+				
+				var response=""; 
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+			       // Typical action to be performed when the document is ready:
+			       		console.log(xhttp.response);
+			       		courses = JSON.parse(xhttp.response)['las'];
+					}
+				};
+		
+				xhttp.open("GET", "../cms/learning_areas.txt", false);
+				xhttp.send();
+
+				app.courses = courses;	
+			}
+			get_courses();
 		</script>
 	</body>
 </html>
