@@ -33,7 +33,7 @@
 				<?php include 'app.php';?>
 				<div id="content-container">
 					<center><h1>{{title}}</h1></center>
-					<div id = "content" class="hide">
+					<div id = "content">
 						<p v-for="paragraph in content" class="paragraph" :id = "paragraph.id">{{paragraph.text}}</p>
 					</div>
 				</div>

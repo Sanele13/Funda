@@ -16,16 +16,17 @@
 						{{course.title}}
 					</div>
 					<div class="chapters hide">
-						<hr style="width: 97%">
-						<div class="chapter" v-for= "chapter in course.chapters" v-on:click = "show_units">
-							{{chapter.title}}
+						<hr>
+						<div v-for = "chapter in course.chapters" class="chapter">
+							<div class="chapter-title" v-on:click = "show_units">
+								{{chapter.title}}
+							</div>
 							<div class="units hide">
 								<hr>
-								<div class="unit" v-for="unit in chapter.units" v-on:click="show_content">
-									-{{unit}}
+								<div class="unit" v-for ="unit in chapter.units" v-on:click = "show_content">
+									{{unit}}
 								</div>
 							</div>
-							<br>							
 						</div>
 					</div>
 				</div>
@@ -33,6 +34,26 @@
 		</div>
 		
 		<script type="text/javascript">
+			function get_content(name){
+				content = [];
+				
+				var response=""; 
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+					       // Typical action to be performed when the document is ready:
+						content = JSON.parse(xhttp.response)['content'];
+						//console.log(content)
+					}
+				};
+			
+				xhttp.open("GET", "../cms/"+name, false);
+				xhttp.send();
+
+				//edit_view_app.content = content;
+				//console.log(content)
+				return content
+			}
 			var app = new Vue({
 				el: ".container",
 				data: {
@@ -52,14 +73,20 @@
 						}
 					},
 					show_units: function(event){
-						console.log(event.path[0].children[0])
-						event.path[0].children[0].classList.toggle('hide')
-						event.path[0].children[0].classList.toggle('display')
+						console.log(event.path[1].children[1])
+						event.path[1].children[1].classList.toggle('hide')
+						event.path[1].children[1].classList.toggle('display')
 					},
-					show_content:function(){
+					show_content:function(event){
+						console.log(event.path[0].innerText)
 						document.getElementsByClassName('container')[0].style.display='none';
-						var title = 
-						document.getElementById("inner-container").innerHTML = title;
+						var course_title = event.path[4].firstChild.innerText;
+						var chapter_title = event.path[2].firstChild.innerText;
+						var unit_title = event.path[0].innerText;	
+						content_app.title = unit_title;
+						console.log(get_content(course_title+"-"+chapter_title+"-"+unit_title))
+						content_app.content = get_content(course_title+"-"+chapter_title+"-"+unit_title);
+
 					}
 				}
 			});
