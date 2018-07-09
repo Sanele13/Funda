@@ -74,74 +74,65 @@
 		document.getElementById('form').style.display = "block"
 	}
 
-	function get_las() {
-		//if(){		
-					var response=""; 
-					var xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-			       // Typical action to be performed when the document is ready:
-							set_las(xhttp.response);
-							}
-						};
-		
-					xhttp.open("GET", "learning_areas.txt", false);
-					xhttp.send();
-					//return response;
-		/*		}
-				else{
-					alert("You need to add the task!");
-				}*/
-	}
-	get_las();
 	var learning_areas;
-	function set_las(las) {
-		learning_areas = JSON.parse(las);
+	function get_las() {		
+		var response="";
+		var json; 
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+			    json = JSON.parse(xhttp.response);
+				}
+			};		
+	    xhttp.open("GET", "learning_areas.txt", false);
+		xhttp.send();
+   		return json;
 	}
-	
-		var temp = {};
-		//console.log(learning_areas[1])
+	learning_areas = get_las();
+	console.log(learning_areas);
+	var temp = {};
+
 	function build_temp(title,chapter,units) {
 		if(Object.keys(temp).length>0){
-			//console.log(learning_areas.length);
 			var units_arr = units.split(',');
 			learning_areas['las'][learning_areas['las'].length-1]['chapters'].push({'title':chapter,'units':units_arr});
-			//console.log(learning_areas[learning_areas.length-1]);
 			console.log(learning_areas);
+			document.getElementById('units_area').innerHTML = "";
+			document.getElementById('chapter_title').value = "";
 		}
 		else{
 			temp['title'] = title;
 			temp['chapters']=[];
 			var units_arr = units.split(',');
 			temp['chapters'].push({'title':chapter,'units':units_arr});
-			//console.log(Object.keys(temp).length);
 			learning_areas['las'].push(temp);
 			console.log(learning_areas)
-			//temp = {};
+			document.getElementById('units_area').innerHTML = "";
+			document.getElementById('chapter_title').value = "";
 		}
 		
 	}
 
 	function submit() {
-		var json = JSON.stringify(learning_areas);
-		//if(){
+		var json;
+		if(document.getElementById('units_area').innerHTML != "" && document.getElementById('chapter_title').value != ""){
+
+			build_temp(document.getElementById('name').value,document.getElementById('chapter_title').value,document.getElementById('units_area').innerHTML)
+		}
+		json = JSON.stringify(learning_areas);
 					var xhttp = new XMLHttpRequest();
 					xhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
-			       // Typical action to be performed when the document is ready:
+		
 							document.getElementById("result").innerHTML = xhttp.responseText;
 							}
 						};
-		
 					xhttp.open("GET", "add_la.php?json="+json, true);
 					xhttp.send();
-
 					get_las();
-		
-		/*		}
-				else{
-					alert("You need to add the task!");
-				}*/
+					document.getElementById('units_area').innerHTML = "";
+					document.getElementById('chapter_title').value = "";
+					document.getElementById('form').style.display = "none";
 	}
 	var app = new Vue({
 		el:"#las",
@@ -165,7 +156,6 @@
 					else{
 						console.log('andazi ke')
 					}
-					//console.log(event.path[1].getElementsByClassName('chapter')[0].classList.contains('hide'))
 				},
 				show_hide_units: function(event){
 					console.log(event.path[1].getElementsByClassName('units')[0].classList)
@@ -196,7 +186,7 @@
 					content = [];
 				//	function() {
 			//if(){		
-						var response=""; 
+					var response=""; 
 						var xhttp = new XMLHttpRequest();
 						xhttp.onreadystatechange = function() {
 							if (this.readyState == 4 && this.status == 200) {
@@ -206,24 +196,17 @@
 								}
 							};
 			
-						xhttp.open("GET", event.path[3].firstChild.innerText+"-"+event.path[2].firstElementChild.innerText+"-"+event.path[0].innerText, false);
-						xhttp.send();
+					xhttp.open("GET", event.path[3].firstChild.innerText+"-"+event.path[2].firstElementChild.innerText+"-"+event.path[0].innerText, false);
+					xhttp.send();
 
-						edit_view_app.content = content;
-						console.log(content)
-						//return response;
-			/*		}
-					else{
-						alert("You need to add the task!");
-					}*/
-		//}
-
+					edit_view_app.content = content;
+					console.log(content)
 					document.getElementById('edit_view').classList.remove('hide');
 					document.getElementById('edit_view').classList.add('display');
 				}
 			}
 	});
-
+	console.log(app);
 	var edit_view_app = new Vue({
 		el:'#edit_view',
 		data:{
@@ -243,35 +226,24 @@
 			},
 			add_para:function(){
 				var id = document.getElementById('id').innerHTML;
-				var paragraph = document.getElementsByClassName('edit')[0].innerHTML.replace(/<div>/g,'')
-				paragraph = paragraph.replace(/<\/div>/g,'')
-				//document.getElementsByClassName('content')[0].innerHTML += '<div id = "'+id+'" contenteditable="false">'+paragraph+'</div>'
-				this.content.push({'id':id,'text':paragraph})
-				//this.content_json[id]=paragraph;
-				//console.log(this.content)
-
-				//clear
+				var paragraph = document.getElementsByClassName('edit')[0].innerHTML.replace(/<div>/g,'');
+				paragraph = paragraph.replace(/<\/div>/g,'');
+				this.content.push({'id':id,'text':paragraph});
 				document.getElementById('id').innerHTML = "";
-				document.getElementsByClassName('edit')[0].innerHTML = ""
+				document.getElementsByClassName('edit')[0].innerHTML = "";
 			},
 			edit_paragraph:function(event){
-				//console.log(event.path[1])
-				//console.log(document.getElementById(event.path[0]['id']).getAttribute('contenteditable'))
 				var paragraph = event.path[1].getElementsByTagName('p')[0];
-				//console.log(paragraph)
 				paragraph.setAttribute('contenteditable','true');
-				paragraph.classList.add('editing')
-				//event.path[0].childNodes[1].setAttribute('style','display:block');
-				var button = event.path[1].getElementsByTagName('button')[0]
-				button.setAttribute('style','display:block')
-				//console.log();
-
+				paragraph.classList.add('editing');
+				var button = event.path[1].getElementsByTagName('button')[0];
+				button.setAttribute('style','display:block');
 			},
 			stop_editing:function(event){
 				//remove éditing' from div
 				var paragraph = event.path[1].getElementsByTagName('p')[0];
 				event.path[0].setAttribute('style','display:none');
-				paragraph.classList.remove('editing')
+				paragraph.classList.remove('editing');
 				paragraph.setAttribute('contenteditable','false');
 				console.log(event.path);
 
